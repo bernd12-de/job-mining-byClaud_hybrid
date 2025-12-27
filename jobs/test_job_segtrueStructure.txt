@@ -1,0 +1,11 @@
+Titel: Senior Software Entwickler (m/w/d)
+Standort: Wiesbaden
+
+Ihre Aufgaben:
+* Entwicklung von Python Backends mit FastAPI.
+* Anbindung von PostgreSQL Datenbanken.
+
+Ihr Profil:
+* Erfahrung mit NLP und Spacy.
+* Kenntnisse in Kotlin und Spring Boot.
+* Teamfähigkeit und Motivation.
