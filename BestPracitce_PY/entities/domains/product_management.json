@@ -1,0 +1,87 @@
+{
+  "domain": "Product Management",
+  "version": "1.0",
+  "description": "Product Management Skills and Methods",
+  "competences": [
+    {
+      "name": "Product Backlog",
+      "category": "Product Management",
+      "type": "method",
+      "alternative_labels": ["Backlog Management", "Backlog Refinement"],
+      "esco_uri": "esco:skill/product_backlog",
+      "confidence": 1.0
+    },
+    {
+      "name": "Roadmap Planning",
+      "category": "Product Management",
+      "type": "method",
+      "alternative_labels": ["Product Roadmap", "Roadmapping"],
+      "esco_uri": "esco:skill/roadmap_planning",
+      "confidence": 1.0
+    },
+    {
+      "name": "Stakeholder Management",
+      "category": "Soft Skill",
+      "type": "skill",
+      "alternative_labels": ["Stakeholder Communication", "Stakeholder Engagement"],
+      "esco_uri": "esco:skill/stakeholder_management",
+      "confidence": 1.0
+    },
+    {
+      "name": "Product Vision",
+      "category": "Product Management",
+      "type": "method",
+      "alternative_labels": ["Vision Development", "Product Strategy"],
+      "esco_uri": "esco:skill/product_vision",
+      "confidence": 1.0
+    },
+    {
+      "name": "User Story Writing",
+      "category": "Agile Practice",
+      "type": "method",
+      "alternative_labels": ["User Stories", "Story Writing"],
+      "esco_uri": "esco:skill/user_story_writing",
+      "confidence": 1.0
+    },
+    {
+      "name": "Prioritization",
+      "category": "Product Management",
+      "type": "skill",
+      "alternative_labels": ["Priorisierung", "Priority Management"],
+      "esco_uri": "esco:skill/prioritization",
+      "confidence": 1.0
+    },
+    {
+      "name": "Requirements Engineering",
+      "category": "Business Analysis",
+      "type": "skill",
+      "alternative_labels": ["Requirements Management", "Anforderungsmanagement"],
+      "esco_uri": "esco:skill/requirements_engineering",
+      "confidence": 1.0
+    },
+    {
+      "name": "MVP Development",
+      "category": "Product Management",
+      "type": "method",
+      "alternative_labels": ["Minimum Viable Product", "MVP"],
+      "esco_uri": "esco:skill/mvp_development",
+      "confidence": 1.0
+    },
+    {
+      "name": "A/B Testing",
+      "category": "Analytics",
+      "type": "method",
+      "alternative_labels": ["AB Testing", "Split Testing"],
+      "esco_uri": "esco:skill/ab_testing",
+      "confidence": 1.0
+    },
+    {
+      "name": "Product Metrics",
+      "category": "Analytics",
+      "type": "skill",
+      "alternative_labels": ["KPIs", "Product Analytics"],
+      "esco_uri": "esco:skill/product_metrics",
+      "confidence": 1.0
+    }
+  ]
+}

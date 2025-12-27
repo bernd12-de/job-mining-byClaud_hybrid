@@ -1,0 +1,71 @@
+{
+  "domain": "Agile Methods",
+  "version": "1.0",
+  "description": "Agile and Scrum Methods",
+  "competences": [
+    {
+      "name": "Scrum",
+      "category": "Agile Method",
+      "type": "method",
+      "alternative_labels": ["Scrum Framework"],
+      "esco_uri": "esco:skill/scrum",
+      "confidence": 1.0
+    },
+    {
+      "name": "Kanban",
+      "category": "Agile Method",
+      "type": "method",
+      "alternative_labels": ["Kanban Method"],
+      "esco_uri": "esco:skill/kanban",
+      "confidence": 1.0
+    },
+    {
+      "name": "Sprint Planning",
+      "category": "Agile Method",
+      "type": "method",
+      "alternative_labels": ["Sprint Planung"],
+      "esco_uri": "esco:skill/sprint_planning",
+      "confidence": 1.0
+    },
+    {
+      "name": "Daily Standup",
+      "category": "Agile Method",
+      "type": "method",
+      "alternative_labels": ["Daily Scrum", "Standup Meeting"],
+      "esco_uri": "esco:skill/daily_standup",
+      "confidence": 1.0
+    },
+    {
+      "name": "Retrospective",
+      "category": "Agile Method",
+      "type": "method",
+      "alternative_labels": ["Sprint Retrospective", "Retro"],
+      "esco_uri": "esco:skill/retrospective",
+      "confidence": 1.0
+    },
+    {
+      "name": "Agile Coaching",
+      "category": "Agile Role",
+      "type": "skill",
+      "alternative_labels": ["Agile Coach"],
+      "esco_uri": "esco:skill/agile_coaching",
+      "confidence": 1.0
+    },
+    {
+      "name": "Scrum Master",
+      "category": "Agile Role",
+      "type": "skill",
+      "alternative_labels": ["SM"],
+      "esco_uri": "esco:skill/scrum_master",
+      "confidence": 1.0
+    },
+    {
+      "name": "Product Owner",
+      "category": "Agile Role",
+      "type": "skill",
+      "alternative_labels": ["PO"],
+      "esco_uri": "esco:skill/product_owner",
+      "confidence": 1.0
+    }
+  ]
+}

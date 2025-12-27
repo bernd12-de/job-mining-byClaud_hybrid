@@ -1,0 +1,6 @@
+out: out.jsonl
+mode: w
+render_js: false
+inputs:
+- tests/fixtures
+- /Users/layher-ad/HiDrive_Space/Sync_Mainz/FH Wiesbaden /Wiesbaden Informatik/Job-Mining-Trends/job_ads_input

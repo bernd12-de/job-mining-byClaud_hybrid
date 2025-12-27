@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=62"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "job_mining_full_v11_3"
+version = "11.3.0"
+requires-python = ">=3.9"
+
+[tool.pytest.ini_options]
+addopts = "-q"
+pythonpath = ["."]

@@ -1,0 +1,87 @@
+{
+  "domain": "UX Design",
+  "version": "1.0",
+  "description": "UX/UI Design Tools and Methods",
+  "competences": [
+    {
+      "name": "Figma",
+      "category": "UX Tools",
+      "type": "tool",
+      "alternative_labels": ["Figma Design"],
+      "esco_uri": "esco:skill/figma",
+      "confidence": 1.0
+    },
+    {
+      "name": "Sketch",
+      "category": "UX Tools",
+      "type": "tool",
+      "alternative_labels": ["Sketch App"],
+      "esco_uri": "esco:skill/sketch",
+      "confidence": 1.0
+    },
+    {
+      "name": "Adobe XD",
+      "category": "UX Tools",
+      "type": "tool",
+      "alternative_labels": ["XD", "Adobe Experience Design"],
+      "esco_uri": "esco:skill/adobe_xd",
+      "confidence": 1.0
+    },
+    {
+      "name": "InVision",
+      "category": "UX Tools",
+      "type": "tool",
+      "alternative_labels": ["InVision Studio"],
+      "esco_uri": "esco:skill/invision",
+      "confidence": 1.0
+    },
+    {
+      "name": "Axure",
+      "category": "UX Tools",
+      "type": "tool",
+      "alternative_labels": ["Axure RP"],
+      "esco_uri": "esco:skill/axure",
+      "confidence": 1.0
+    },
+    {
+      "name": "Wireframing",
+      "category": "UX Method",
+      "type": "method",
+      "alternative_labels": ["Wireframe Design", "Wireframes"],
+      "esco_uri": "esco:skill/wireframing",
+      "confidence": 1.0
+    },
+    {
+      "name": "Prototyping",
+      "category": "UX Method",
+      "type": "method",
+      "alternative_labels": ["Prototype Design", "Interactive Prototypes"],
+      "esco_uri": "esco:skill/prototyping",
+      "confidence": 1.0
+    },
+    {
+      "name": "User Research",
+      "category": "UX Method",
+      "type": "method",
+      "alternative_labels": ["User Studies", "UX Research"],
+      "esco_uri": "esco:skill/user_research",
+      "confidence": 1.0
+    },
+    {
+      "name": "Usability Testing",
+      "category": "UX Method",
+      "type": "method",
+      "alternative_labels": ["User Testing", "Usability Tests"],
+      "esco_uri": "esco:skill/usability_testing",
+      "confidence": 1.0
+    },
+    {
+      "name": "Information Architecture",
+      "category": "UX Method",
+      "type": "method",
+      "alternative_labels": ["IA", "Information Design"],
+      "esco_uri": "esco:skill/information_architecture",
+      "confidence": 1.0
+    }
+  ]
+}
