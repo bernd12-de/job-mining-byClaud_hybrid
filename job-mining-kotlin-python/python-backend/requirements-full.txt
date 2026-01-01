@@ -1,0 +1,26 @@
+# ============================================================================
+# FULL INSTALLATION - Alle Features
+# ============================================================================
+# Installiert ALLE Dependencies (Core + OCR + ML + DB)
+#
+# Installation:
+#   pip install -r requirements-full.txt
+#
+# Entspricht:
+#   pip install -r requirements.txt
+#   pip install -r requirements-ocr.txt
+#   pip install -r requirements-ml.txt
+#   pip install -r requirements-db.txt
+# ============================================================================
+
+# Core Requirements
+-r requirements.txt
+
+# OCR Features
+-r requirements-ocr.txt
+
+# ML Features
+-r requirements-ml.txt
+
+# Database Support
+-r requirements-db.txt

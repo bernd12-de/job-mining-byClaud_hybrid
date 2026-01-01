@@ -1,0 +1,20 @@
+# ============================================================================
+# OPTIONAL: OCR & Image Processing Features
+# ============================================================================
+# Für gescannte PDFs und Screenshot-Verarbeitung
+#
+# Installation:
+#   pip install -r requirements-ocr.txt
+#
+# System-Dependencies (Linux):
+#   sudo apt-get install tesseract-ocr tesseract-ocr-deu poppler-utils
+# ============================================================================
+
+# OCR Engine Wrapper
+pytesseract==0.3.10
+
+# Image Processing
+Pillow==10.2.0
+
+# PDF zu Image Konvertierung
+pdf2image==1.17.0

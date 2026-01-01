@@ -1,0 +1,62 @@
+# ============================================================================
+# JOB MINING V2.0 - CORE REQUIREMENTS (MINIMAL)
+# ============================================================================
+# Diese Pakete sind IMMER erforderlich für Basis-Funktionalität
+#
+# Für erweiterte Features siehe:
+# - requirements-ocr.txt (Gescannte PDFs)
+# - requirements-ml.txt (Semantic Matching)
+# - requirements-db.txt (PostgreSQL)
+# - requirements-full.txt (Alles)
+# ============================================================================
+
+# Core Framework
+fastapi==0.104.1
+uvicorn==0.24.0
+flask==3.0.0
+flask-cors==4.0.0
+pydantic==1.10.13  # FastAPI 0.104.x benötigt Pydantic v1
+
+# NLP & Text Processing
+spacy==3.7.2
+rapidfuzz==3.5.2
+python-dotenv==1.0.0
+
+# Data Science / Processing
+pandas==2.1.4
+numpy==1.24.3
+openpyxl==3.1.2
+
+# Web Scraping & HTTP
+requests==2.31.0
+beautifulsoup4==4.12.3
+lxml==4.9.3
+playwright==1.42.0
+charset-normalizer==3.3.2
+
+# Utilities (PDF/DOCX ohne OCR)
+python-docx==1.1.0
+pypdf==4.1.0
+pdfminer.six
+reportlab==4.4.7
+
+# Dashboard & Visualisierung
+streamlit==1.30.0
+plotly==5.18.0
+
+# Testing
+pytest==8.1.1
+
+# Machine Learning (Core - ohne Transformers)
+scikit-learn<1.6
+python-multipart==0.0.9
+tqdm
+
+
+
+
+
+
+
+
+

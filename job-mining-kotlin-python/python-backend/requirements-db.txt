@@ -1,0 +1,13 @@
+# ============================================================================
+# OPTIONAL: PostgreSQL Database Support
+# ============================================================================
+# Für persistente Speicherung von Jobs und Kompetenzen
+#
+# Installation:
+#   pip install -r requirements-db.txt
+#
+# Voraussetzung: PostgreSQL Server muss laufen
+# ============================================================================
+
+# PostgreSQL Adapter
+psycopg2-binary==2.9.9

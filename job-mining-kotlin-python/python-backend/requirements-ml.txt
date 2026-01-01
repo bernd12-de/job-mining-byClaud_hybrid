@@ -1,0 +1,13 @@
+# ============================================================================
+# OPTIONAL: Machine Learning & Semantic Matching
+# ============================================================================
+# Für ESCO Dual-Mapping mit Semantic Similarity
+#
+# Installation:
+#   pip install -r requirements-ml.txt
+#
+# WARNUNG: Downloads ~500MB ML-Modelle beim ersten Start!
+# ============================================================================
+
+# Semantic Similarity (Transformer Models)
+sentence-transformers==2.3.1

@@ -1,0 +1,27 @@
+nohup: ignoring input
+INFO:JobMiningBackend:🔧 Initialisiere Komponenten...
+INFO:JobMiningBackend:✅ System erfolgreich verdrahtet.
+INFO:     Started server process [145840]
+INFO:     Waiting for application startup.
+INFO:JobMiningBackend:🚀 API startet...
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:JobMiningBackend:🌍 [POST /analyse/scrape-url] URL: https://www.wikipedia.org/
+INFO:app.application.job_mining_workflow_manager:Segmentierung für 'https://www.wikipedia.org/' zu kurz. Nutze Volltext.
+🔗 KotlinRuleClient initialisiert. Basis-URL: http://localhost:8080
+📡 Lade ESCO-Daten von http://localhost:8080/api/v1/rules/esco-full...
+   -> HTTP-Status: 200
+   -> Response-Type: <class 'list'>; Länge: 15720
+👀 DEBUG KEYS: ['original_term', 'confidence_score', 'esco_label', 'esco_uri', 'esco_group_code', 'is_digital', 'is_discovery', 'level', 'role_context', 'source_domain']
+👀 DEBUG SAMPLE: {'original_term': 'Aktien und Anleihen.', 'confidence_score': 1.0, 'esco_label': 'Aktien und Anleihen.', 'esco_uri': 'der Förderung und des Lebenszyklus von Finanzprodukten wie Versicherungen', 'esco_group_code': 'GENERIC', 'is_digital': False, 'is_discovery': False, 'level': 2, 'role_context': None, 'source_domain': None}
+✅ 15719 Skills erfolgreich von Kotlin geladen.
+✅ 5 Branchen-Regeln geladen.
+✅ 5 Branchen-Regeln geladen.
+✅ 5 Branchen-Regeln geladen.
+✅ spaCy Extractor geladen mit 30228 Begriffen (inkl. Varianten).
+-> Starte statisches Scraping für URL: https://www.wikipedia.org/
+INFO:     127.0.0.1:47410 - "POST /analyse/scrape-url HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [145840]
