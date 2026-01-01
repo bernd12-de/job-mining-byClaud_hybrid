@@ -1,0 +1,41 @@
+# Multi-Stage Build: Schlankes Production Image
+FROM python:3.11-slim as builder
+
+WORKDIR /app
+
+# System-Dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Python Dependencies
+COPY requirements.txt .
+RUN pip install --user --no-cache-dir -r requirements.txt
+
+# Stage 2: Runtime
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install nur Runtime-Dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy nur die installierten Packages
+COPY --from=builder /root/.local /root/.local
+
+# Environment
+ENV PATH=/root/.local/bin:$PATH \
+    PYTHONUNBUFFERED=1 \
+    BASE_DATA_DIR=/app/data
+
+# Copy Application Code
+COPY python-backend/ /app/
+
+# Health Check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD python -c "from app.core.models import JobPosting; print('OK')" || exit 1
+
+# Default Entry Point
+CMD ["python", "main_v2.py"]

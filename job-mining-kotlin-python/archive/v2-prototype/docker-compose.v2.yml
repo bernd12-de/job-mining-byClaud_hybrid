@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  # Python Backend V2.0 - Job Mining Pipeline
+  python-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.v2
+    container_name: job-mining-python-v2
+    environment:
+      - PYTHONUNBUFFERED=1
+      - BASE_DATA_DIR=/app/data
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./python-backend/data:/app/data:ro
+      - ./python-backend/logs:/app/logs
+    ports:
+      - "5000:5000"  # Flask/FastAPI wenn später hinzugefügt
+    networks:
+      - job-mining-network
+    healthcheck:
+      test: ["CMD", "python", "-c", "from app.core.models import JobPosting; print('OK')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Kotlin/Spring Boot API (optional, falls später integriert)
+  kotlin-api:
+    build:
+      context: ./kotlin-api
+      dockerfile: Dockerfile
+    container_name: job-mining-kotlin-api
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - PYTHON_BACKEND_URL=http://python-backend:5000
+    ports:
+      - "8080:8080"
+    depends_on:
+      python-backend:
+        condition: service_healthy
+    networks:
+      - job-mining-network
+
+networks:
+  job-mining-network:
+    driver: bridge
