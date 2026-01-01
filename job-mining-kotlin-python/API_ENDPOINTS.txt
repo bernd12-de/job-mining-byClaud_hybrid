@@ -1,0 +1,364 @@
+================================================================================
+                      JOB MINING SYSTEM - API ENDPOINTS
+                           Version 2.0 (2025-12-27)
+================================================================================
+
+SERVER URLS
+─────────────────────────────────────────────────────────────────────────────────
+Kotlin API:        http://localhost:8080
+Python Backend:    http://localhost:8000
+Dashboard:         http://localhost:8501
+Swagger UI:        http://localhost:8080/swagger-ui.html
+FastAPI Docs:      http://localhost:8000/docs
+
+================================================================================
+KOTLIN API - PORT 8080
+================================================================================
+
+JOB MANAGEMENT
+──────────────
+  [POST]   /api/v1/jobs/upload
+           → Beschreibung: PDF/DOCX hochladen & analysieren
+           → Body: multipart/form-data { file: <binary> }
+
+  [POST]   /api/v1/jobs/scrape
+           → Beschreibung: Web-URL scrapen (mit renderJs=true für JS-Sites)
+           → Body: JSON { "url": "https://..." }
+           → Query: ?renderJs=true (optional)
+
+  [POST]   /api/v1/jobs/batch-analyze
+           → Beschreibung: Batch-Analyse aus python-backend/data/jobs/
+           → Body: (empty)
+
+  [GET]    /api/v1/jobs
+           → Beschreibung: Alle analysierten Jobs abrufen
+           → Response: JSON Array mit JobPosting-Objekten
+
+REPORTS & ANALYTICS
+───────────────────
+  [GET]    /api/v1/jobs/reports/dashboard-metrics
+           → Beschreibung: Dashboard-Statistiken
+           → Query: ?top_n=10 (optional, default=10)
+           → Response: { total_jobs, skills_total, top_skills, ... }
+
+  [GET]    /api/v1/jobs/reports/competence-trends
+           → Beschreibung: Top Kompetenzen-Trends
+           → Query: ?limit=5 (optional, default=5)
+           → Response: Array von CompetenceReportDTO
+
+  [GET]    /api/v1/jobs/reports/export.csv
+           → Beschreibung: CSV-Export aller Jobs
+           → Response: text/csv
+
+  [GET]    /api/v1/jobs/reports/export.pdf
+           → Beschreibung: PDF-Report generieren
+           → Response: application/pdf
+
+RULE MANAGEMENT (Domänen-Mappings)
+──────────────────────────────────
+  [GET]    /api/v1/rules/blacklist
+           → Beschreibung: Blacklist abrufen (generische Begriffe)
+           → Response: Array<String>
+
+  [GET]    /api/v1/rules/role-mappings
+           → Beschreibung: Rollen-Mappings (z.B. "Developer" → regex)
+           → Response: Object<String, String>
+
+  [GET]    /api/v1/rules/industry-mappings
+           → Beschreibung: Branchen-Mappings (z.B. "IT" → regex)
+           → Response: Object<String, String>
+
+  [GET]    /api/v1/rules/esco-full
+           → Beschreibung: Vollständige ESCO-Wissensbasis
+           → Response: Array<CompetenceDTO>
+
+  [GET]    /api/v1/rules/stats
+           → Beschreibung: Regelstatistiken
+           → Response: Object mit counts und metrics
+
+DISCOVERY (Neuentdeckung von Kompetenzen)
+──────────────────────────────────────────
+  [GET]    /api/discovery/candidates
+           → Beschreibung: Neue Kompetenzkandidaten
+           → Response: Array<Candidate>
+
+  [GET]    /api/discovery/approved
+           → Beschreibung: Approuvierte Kompetenzen
+           → Response: Object<String, String>
+
+  [GET]    /api/discovery/ignore
+           → Beschreibung: Ignorierte Begriffe
+           → Response: Array<String>
+
+  [POST]   /api/discovery/approve
+           → Beschreibung: Kompetenz genehmigen
+           → Body: { "term": "...", "canonicalLabel": "..." }
+
+  [POST]   /api/discovery/reject
+           → Beschreibung: Kompetenz ablehnen
+           → Body: { "term": "..." }
+
+ADMIN & SYSTEM
+──────────────
+  [GET]    /api/v1/jobs/admin/system-health
+           → Beschreibung: System-Status prüfen
+           → Response: JSON mit DB, Cache, Service-Status
+
+  [POST]   /api/v1/jobs/admin/sync-python-knowledge
+           → Beschreibung: Knowledge von Python synchronisieren
+           → Body: (empty)
+
+  [DELETE] /api/v1/jobs/admin/clear-all-data
+           → Beschreibung: ⚠️ ALLE Daten löschen (vorsicht!)
+           → Body: (empty)
+
+SERVICE & HEALTH
+────────────────
+  [GET]    /api/links
+           → Beschreibung: Alle Service-Links abrufen
+           → Response: ServiceLinksResponse
+
+  [GET]    /api/v1/test-python
+           → Beschreibung: Python-Verbindung testen
+           → Response: String
+
+  [GET]    /actuator/health
+           → Beschreibung: Spring Boot Health-Check
+           → Response: { status: "UP", ... }
+
+================================================================================
+PYTHON BACKEND - PORT 8000
+================================================================================
+
+JOB ANALYSIS
+────────────
+  [POST]   /analyse/file
+           → Beschreibung: Lokale Datei analysieren (PDF/DOCX)
+           → Body: multipart/form-data { file: <binary> }
+
+  [POST]   /analyse/scrape-url
+           → Beschreibung: URL scrapen + NLP-Analyse
+           → Body: JSON { "url": "https://...", "renderJs": true|false }
+
+  [POST]   /batch-process
+           → Beschreibung: ALLE lokalen Jobs aus data/jobs/ verarbeiten
+           → Body: (empty)
+           → Side effect: Schreibt JSON-Exports nach data/exports/batch_results/
+
+KNOWLEDGE MANAGEMENT
+────────────────────
+  [GET]    /system/status
+           → Beschreibung: Python-System Status
+           → Response: { status: "UP", skills_loaded: N, ... }
+
+  [POST]   /internal/admin/refresh-knowledge
+           → Beschreibung: Knowledge-Base neu laden (ESCO, Fallback)
+           → Body: (empty)
+           → Response: { status: "refreshed", skills: N }
+
+REPORTS
+───────
+  [GET]    /reports/dashboard-metrics
+           → Beschreibung: Dashboard-Metriken
+           → Response: Metrics für Frontend
+
+  [GET]    /reports/export-metrics
+           → Beschreibung: Metriken-Export
+           → Response: JSON/CSV
+
+FASTAPI STANDARD
+────────────────
+  [GET]    /docs
+           → Beschreibung: Swagger UI (FastAPI)
+
+  [GET]    /openapi.json
+           → Beschreibung: OpenAPI-Schema
+
+  [GET]    /redoc
+           → Beschreibung: ReDoc-Dokumentation
+
+================================================================================
+QUICK REFERENCE - HÄUFIG GENUTZTE ENDPOINTS
+================================================================================
+
+TOP 5 ENDPOINTS (nach Häufigkeit):
+  1. GET    /api/v1/jobs/reports/dashboard-metrics      (⭐⭐⭐)
+  2. GET    /api/v1/jobs                                 (⭐⭐⭐)
+  3. POST   /api/v1/jobs/scrape                          (⭐⭐)
+  4. POST   /batch-process                               (⭐⭐)
+  5. GET    /api/v1/rules/esco-full                      (⭐)
+
+================================================================================
+EXAMPLE CURL COMMANDS
+================================================================================
+
+1. TEST HEALTH STATUS
+   ────────────────────────────────────────────────────────────────────────
+   curl http://localhost:8080/actuator/health | jq '.'
+   curl http://localhost:8000/system/status | jq '.'
+
+2. SCRAPE URL (mit JavaScript-Rendering)
+   ────────────────────────────────────────────────────────────────────────
+   curl -X POST "http://localhost:8080/api/v1/jobs/scrape?renderJs=true" \
+     -H "Content-Type: application/json" \
+     -d '{"url":"https://www.xing.com/jobs/berlin-senior-uiux-designer"}'
+
+3. START BATCH PROCESSING
+   ────────────────────────────────────────────────────────────────────────
+   curl -X POST http://localhost:8000/batch-process | jq '.[] | {title, competences}'
+
+4. GET DASHBOARD METRICS
+   ────────────────────────────────────────────────────────────────────────
+   curl "http://localhost:8080/api/v1/jobs/reports/dashboard-metrics?top_n=15" | jq '.'
+
+5. LIST ALL JOBS
+   ────────────────────────────────────────────────────────────────────────
+   curl http://localhost:8080/api/v1/jobs | jq '.[] | {title, jobRole, region, industry}'
+
+6. GET ESCO KNOWLEDGE BASE
+   ────────────────────────────────────────────────────────────────────────
+   curl http://localhost:8080/api/v1/rules/esco-full | jq '.[0:3]'
+
+7. UPLOAD & ANALYZE PDF
+   ────────────────────────────────────────────────────────────────────────
+   curl -X POST http://localhost:8080/api/v1/jobs/upload \
+     -F "file=@job_ad.pdf"
+
+8. GET ROLE MAPPINGS
+   ────────────────────────────────────────────────────────────────────────
+   curl http://localhost:8080/api/v1/rules/role-mappings | jq '.'
+
+9. CLEAR ALL DATA (⚠️ DESTRUCTIVE)
+   ────────────────────────────────────────────────────────────────────────
+   curl -X DELETE http://localhost:8080/api/v1/jobs/admin/clear-all-data
+
+10. SYNC KNOWLEDGE FROM PYTHON
+    ────────────────────────────────────────────────────────────────────────
+    curl -X POST http://localhost:8080/api/v1/jobs/admin/sync-python-knowledge
+
+================================================================================
+IMPORTANT DIRECTORIES & FILES
+================================================================================
+
+Data & Exports:
+  python-backend/data/jobs/                   ← Lokale Job-Dateien (PDF, DOCX)
+  python-backend/data/exports/batch_results/  ← Batch-Export JSONs
+  data/fallback_rules/                        ← Blacklist & Mappings
+
+Configuration:
+  docker-compose.yml / docker-compose.v2.yml ← Service-Setup
+  Dockerfile / Dockerfile.v2                  ← Image-Definitionen
+  kotlin-api/build.gradle.kts                 ← Kotlin Dependencies
+  python-backend/requirements.txt             ← Python Dependencies
+
+Documentation:
+  API_ENDPOINTS.md                            ← Diese Datei (Markdown)
+  API_ENDPOINTS.txt                           ← (Plain Text)
+  api-reference.html                          ← HTML-Übersicht
+  QUICKSTART_V2.0.md                          ← Quick Start Guide
+  SETUP_V2.0.md                               ← Detaillierter Setup
+  docs/DASHBOARD.md                           ← Dashboard-Guide
+
+Scripts:
+  start.sh                                    ← Docker Startup
+  show-api-endpoints.sh                       ← Diese Übersicht zeigen
+
+================================================================================
+DOCUMENTATION & TOOLS
+================================================================================
+
+Online Documentation:
+  • Swagger UI:    http://localhost:8080/swagger-ui.html
+  • FastAPI Docs:  http://localhost:8000/docs
+  • ReDoc:         http://localhost:8000/redoc
+  • HTML Reference: ./api-reference.html
+  • Markdown Ref:  ./API_ENDPOINTS.md
+
+Local Files:
+  • API_ENDPOINTS.md       (Markdown)
+  • API_ENDPOINTS.txt      (Plain Text)
+  • api-reference.html     (HTML)
+  • show-api-endpoints.sh  (Bash Script)
+
+================================================================================
+SYSTEM ARCHITECTURE
+================================================================================
+
+Request Flow:
+  User/Frontend
+    ↓
+  Swagger UI (8080) or FastAPI Docs (8000)
+    ↓
+  Kotlin API (Spring Boot) ↔ Python Backend (FastAPI)
+    ↓
+  PostgreSQL Database
+    ↓
+  Streamlit Dashboard (8501)
+
+Key Components:
+  • Kotlin Spring Boot:    Main API, Rule Management, Reporting
+  • Python FastAPI:        Scraping (Playwright), NLP, Competence Extraction
+  • PostgreSQL:            Jobs, Rules, Competences storage
+  • Streamlit:             Interactive Dashboard & Visualization
+
+================================================================================
+TIPS & TRICKS
+================================================================================
+
+✅ USE THE SWAGGER UI
+   Der beste Weg, alle Endpoints zu entdecken ist:
+   http://localhost:8080/swagger-ui.html
+
+✅ JQ FOR JSON PARSING
+   Alle curl Outputs mit jq formatieren:
+   curl ... | jq '.'
+
+✅ BATCH EXPORT FORMAT
+   Batch-Results landen in JSON-Format:
+   cat python-backend/data/exports/batch_results/summary.json
+
+✅ LOGS ANSCHAUEN
+   docker logs <container-id>
+   docker logs -f <container-id>  (follow mode)
+
+✅ ENVIRONMENT VARIABLES
+   In docker-compose.yml setzen:
+   - BATCH_SIZE
+   - TIMEOUT
+   - DEBUG
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+API zeigt 500 Error:
+  → Check: curl http://localhost:8080/actuator/health
+  → Logs: docker logs kotlin-api
+
+Python Backend offline:
+  → Check: curl http://localhost:8000/system/status
+  → Logs: docker logs python-backend
+
+Swagger nicht erreichbar:
+  → Prüfe: http://localhost:8080/v3/api-docs (raw OpenAPI)
+  → Fallback: http://localhost:8080/swagger-ui.html
+
+Database Connection Error:
+  → Check: docker ps (PostgreSQL läuft?)
+  → Logs: docker logs postgres
+
+================================================================================
+LAST UPDATED
+================================================================================
+
+Generated: 2025-12-27
+Last Modified: 2025-12-27
+Version: 2.0 (Production Ready)
+
+Questions? Check:
+  1. Swagger UI (http://localhost:8080/swagger-ui.html)
+  2. API_ENDPOINTS.md
+  3. QUICKSTART_V2.0.md
+  4. SETUP_V2.0.md
+
+================================================================================

@@ -1,0 +1,107 @@
+version: '3.9'
+services:
+  # 1. Kotlin API Gateway
+  kotlin-api:
+    build:
+      context: ./kotlin-api
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      # Verlinkung zur Datenbank und zum Python-Service
+      SPRING_DATASOURCE_URL: jdbc:postgresql://jobmining-db:5432/jobmining_db
+      PYTHON_API_URL: http://python-backend:8000
+      # Spring-Friendly env var (maps to 'python.api.base-url')
+      PYTHON_API_BASE_URL: http://python-backend:8000
+      ESCO_DATA_PATH: /app/data/esco
+      # Spring property (maps to 'app.esco.data-path')
+      APP_ESCO_DATA_PATH: /app/data/esco
+    depends_on:
+      - jobmining-db
+      - python-backend
+    volumes:
+        # Mount the repository data folder (python-backend/data) into the container
+        - ./python-backend/data:/app/data  # 🚨 WICHTIG: Auch Kotlin muss die CSVs für den Integritätscheck sehen!
+
+
+
+  # 2. Python Analysis Engine
+  python-backend:
+    build: ./python-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      # ZENTRALE DEFINITION: Hier sagen wir Python, wo Kotlin wohnt.
+      # "kotlin-api" ist der Service-Name aus Zeile 3 dieser Datei.
+      KOTLIN_API_URL: http://kotlin-api:8080
+      BASE_DATA_DIR: /app/data
+      # NLP Logging & Limits (können später wieder entfernt werden)
+      LOG_NLP_TIMINGS: "1"
+      SPACY_TEXT_LIMIT: "4000"
+      PLAYWRIGHT_AUTO_INSTALL: "true"
+    # Wichtig: Bindet den lokalen Datenordner in den Container ein (für ESCO-Dateien)
+    volumes:
+      - ./python-backend/data:/app/data
+
+  # 2b. Streamlit Dashboard (optional)
+  streamlit:
+    build: ./python-backend
+    command: streamlit run dashboard_app.py --server.port 8501 --server.address 0.0.0.0
+    ports:
+      - "8501:8501"
+    environment:
+      BASE_DATA_DIR: /app/data
+    volumes:
+      - ./python-backend/data:/app/data
+    depends_on:
+      - python-backend
+
+  # 2c. API Health Check Monitor
+  api-health-check:
+    image: alpine:latest
+    command: >
+      sh -c "
+      apk add --no-cache bash curl &&
+      cp /mnt/check.sh /check.sh &&
+      chmod +x /check.sh &&
+      /check.sh
+      "
+    volumes:
+      - .:/mnt
+      - ./api-health-check.sh:/mnt/check.sh:ro
+    depends_on:
+      - kotlin-api
+      - python-backend
+    environment:
+      WAIT_TIMEOUT: 60
+      MAX_RETRIES: 60
+    networks:
+      - default
+    healthcheck:
+      test: ["CMD", "bash", "/check.sh"]
+      interval: 60s
+      timeout: 30s
+      retries: 1
+      start_period: 10s
+
+  # 3. PostgreSQL Database
+  jobmining-db:
+    image: postgres:15-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: jobmining_db
+      POSTGRES_USER: jobmining_user
+      POSTGRES_PASSWORD: secret_password
+    volumes:
+      - jobmining-data:/var/lib/postgresql/data
+#  (.venv) layher-ad@MacBookPro job-mining-kotlin-python % docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' job-mining-kotlin-python-jobmining-db-1
+#  172.18.0.2
+#NAME                                      IMAGE                COMMAND                  SERVICE        CREATED          STATUS          PORTS
+#job-mining-kotlin-python-jobmining-db-1   postgres:16-alpine   "docker-entrypoint.s…"   jobmining-db   52 seconds ago   Up 52 seconds   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp
+
+volumes:
+  jobmining-data:
+

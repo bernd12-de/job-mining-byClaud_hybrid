@@ -1,0 +1,37 @@
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+API Health Monitor Session: Wed Dec 31 20:45:22 CET 2025
+Check Interval: 60s
+Alert Threshold: 1 errors
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2025-12-31 20:46:52] [ERROR] Health check FAILED -        1 endpoints DOWN
+[1;33mLOST ENDPOINTS:[0m
+  - POST /api/v1/jobs/upload (kotlin)
+  - POST /api/v1/jobs/scrape (kotlin)
+  - POST /api/v1/jobs/batch-analyze (kotlin)
+  - GET /api/v1/jobs (kotlin)
+  - GET /api/v1/jobs/reports/dashboard-metrics (kotlin)
+  - GET /api/v1/jobs/reports/competence-trends (kotlin)
+  - GET /api/v1/jobs/reports/export.csv (kotlin)
+  - GET /api/v1/jobs/reports/export.pdf (kotlin)
+  - GET /api/v1/rules/blacklist (kotlin)
+  - GET /api/v1/rules/role-mappings (kotlin)
+  - GET /api/v1/rules/industry-mappings (kotlin)
+  - GET /api/v1/rules/esco-full (kotlin)
+  - GET /api/v1/rules/stats (kotlin)
+  - GET /api/discovery/candidates (kotlin)
+  - GET /api/discovery/approved (kotlin)
+  - GET /api/discovery/ignore (kotlin)
+  - POST /api/discovery/approve (kotlin)
+  - POST /api/discovery/reject (kotlin)
+  - GET /api/v1/jobs/admin/system-health (kotlin)
+  - POST /api/v1/jobs/admin/sync-python-knowledge (kotlin)
+  - DELETE /api/v1/jobs/admin/clear-all-data (kotlin)
+  - GET /api/links (kotlin)
+  - GET /actuator/health (kotlin)
+  - POST /analyse/file (python)
+  - POST /analyse/scrape-url (python)
+  - POST /batch-process (python)
+  - GET /system/status (python)
+  - POST /internal/admin/refresh-knowledge (python)
+  - GET /reports/dashboard-metrics (python)
+  - GET /docs (python)

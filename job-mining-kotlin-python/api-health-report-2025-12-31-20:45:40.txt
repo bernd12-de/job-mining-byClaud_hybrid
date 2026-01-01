@@ -1,0 +1,20 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                   API HEALTH CHECK REPORT                                      ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+Timestamp: 2025-12-31 20:45:40
+Host: PC192.168.2.102
+
+═══════════════════════════════════════════════════════════════════════════════
+
+[2025-12-31 20:45:22] ⏳ Warte auf Kotlin API (8080)...
+[2025-12-31 20:45:22] ⏳ Warte auf Python Backend (8000)...
+[0;32m[OK][0m Kotlin API ist READY
+[0;31m[ERROR][0m [python:8000] GET /system/status - NOT RESPONDING
+[0;31m[ERROR][0m [python:8000] POST /internal/admin/refresh-knowledge - NOT RESPONDING
+[0;31m[ERROR][0m [python:8000] GET /reports/dashboard-metrics - NOT RESPONDING
+[0;31m[ERROR][0m [python:8000] GET /docs - NOT RESPONDING
+[0;31m[ERROR][0m 30/30 endpoints DOWN - see details above
+[2025-12-31 20:45:40] 📄 Generiere Health-Report...
+
+═══════════════════════════════════════════════════════════════════════════════

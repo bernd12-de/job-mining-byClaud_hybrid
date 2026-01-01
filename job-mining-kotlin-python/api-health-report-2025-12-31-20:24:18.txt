@@ -1,0 +1,48 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                   API HEALTH CHECK REPORT                                      ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+Timestamp: 2025-12-31 20:24:18
+Host: PC192.168.2.102
+
+═══════════════════════════════════════════════════════════════════════════════
+
+[2025-12-31 20:23:45] ⏳ Warte auf Python Backend (8000)...
+[2025-12-31 20:23:45] ⏳ Warte auf Kotlin API (8080)...
+[1;33m[WARN][0m Kotlin API ist NICHT ERREICHBAR nach 30 Sekunden
+[1;33m[WARN][0m Python Backend ist NICHT ERREICHBAR nach 30 Sekunden
+[2025-12-31 20:24:17] 🔍 Validiere alle registrierten Endpoints...
+[0;31m[ERROR][0m [kotlin:8080] POST /api/v1/jobs/upload - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] POST /api/v1/jobs/scrape - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] POST /api/v1/jobs/batch-analyze - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] GET /api/v1/jobs - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] GET /api/v1/jobs/reports/dashboard-metrics - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] GET /api/v1/jobs/reports/competence-trends - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] GET /api/v1/jobs/reports/export.csv - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] GET /api/v1/jobs/reports/export.pdf - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] GET /api/v1/rules/blacklist - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] GET /api/v1/rules/role-mappings - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] GET /api/v1/rules/industry-mappings - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] GET /api/v1/rules/esco-full - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] GET /api/v1/rules/stats - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] GET /api/discovery/candidates - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] GET /api/discovery/approved - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] GET /api/discovery/ignore - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] POST /api/discovery/approve - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] POST /api/discovery/reject - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] GET /api/v1/jobs/admin/system-health - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] POST /api/v1/jobs/admin/sync-python-knowledge - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] DELETE /api/v1/jobs/admin/clear-all-data - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] GET /api/links - NOT RESPONDING
+[0;31m[ERROR][0m [kotlin:8080] GET /actuator/health - NOT RESPONDING
+[0;31m[ERROR][0m [python:8000] POST /analyse/file - NOT RESPONDING
+[0;31m[ERROR][0m [python:8000] POST /analyse/scrape-url - NOT RESPONDING
+[0;31m[ERROR][0m [python:8000] POST /batch-process - NOT RESPONDING
+[0;31m[ERROR][0m [python:8000] GET /system/status - NOT RESPONDING
+[0;31m[ERROR][0m [python:8000] POST /internal/admin/refresh-knowledge - NOT RESPONDING
+[0;31m[ERROR][0m [python:8000] GET /reports/dashboard-metrics - NOT RESPONDING
+[0;31m[ERROR][0m [python:8000] GET /docs - NOT RESPONDING
+[0;31m[ERROR][0m 30/30 endpoints DOWN - see details above
+[2025-12-31 20:24:18] 📄 Generiere Health-Report...
+
+═══════════════════════════════════════════════════════════════════════════════
