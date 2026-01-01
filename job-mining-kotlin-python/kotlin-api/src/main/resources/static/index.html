@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Mining — Control Hub</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            padding: 24px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+        .card-icon {
+            font-size: 2.5em;
+            margin-bottom: 12px;
+        }
+        .card-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .card-desc {
+            font-size: 0.95em;
+            color: #555;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+        .card-link {
+            display: inline-block;
+            color: #667eea;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 8px;
+        }
+        .card-link:hover {
+            text-decoration: underline;
+        }
+        .status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 2px solid #eee;
+        }
+        .status-item {
+            background: #f9f9f9;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .status-icon {
+            font-size: 1.5em;
+            margin-bottom: 8px;
+        }
+        .status-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .status-value {
+            font-weight: 600;
+            color: #333;
+            margin-top: 4px;
+        }
+        .api-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .api-link {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 12px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.9em;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .api-link:hover {
+            background: #f0f4ff;
+            border-color: #667eea;
+            color: #667eea;
+        }
+        .section-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Job Mining — Control Hub</h1>
+        <p class="subtitle">Alle Services und Dashboards auf einen Blick</p>
+
+        <div class="grid">
+            <!-- Swagger UI -->
+            <a href="/swagger-ui/index.html" class="card">
+                <div class="card-icon">📚</div>
+                <div class="card-title">Swagger UI</div>
+                <div class="card-desc">Interaktive API-Dokumentation & Tests</div>
+                <div class="card-link">Öffnen →</div>
+            </a>
+
+            <!-- Streamlit Dashboard -->
+            <a href="http://localhost:8501" class="card">
+                <div class="card-icon">📊</div>
+                <div class="card-title">Streamlit Dashboard</div>
+                <div class="card-desc">Visualisierungen, Reports & Trends</div>
+                <div class="card-link">Öffnen →</div>
+            </a>
+
+            <!-- Python API Docs -->
+            <a href="http://localhost:8000/docs" class="card">
+                <div class="card-icon">🐍</div>
+                <div class="card-title">Python API Docs</div>
+                <div class="card-desc">FastAPI-Backend Dokumentation</div>
+                <div class="card-link">Öffnen →</div>
+            </a>
+
+            <!-- Database Admin (optional) -->
+            <a href="/actuator/health" class="card">
+                <div class="card-icon">💚</div>
+                <div class="card-title">Health Status</div>
+                <div class="card-desc">System-Status & DB-Verbindung</div>
+                <div class="card-link">Öffnen →</div>
+            </a>
+        </div>
+
+        <div class="section-title">📡 Häufig genutzte Endpoints</div>
+        <div class="api-grid">
+            <a href="/swagger-ui/index.html#/job-controller/uploadAndAnalyzeJobAd" class="api-link">
+                📤 Job hochladen
+            </a>
+            <a href="/swagger-ui/index.html#/discovery-controller/listCandidates" class="api-link">
+                🔍 Discovery-Kandidaten
+            </a>
+            <a href="/swagger-ui/index.html#/job-controller/listJobs" class="api-link">
+                📋 Alle Jobs
+            </a>
+            <a href="/swagger-ui/index.html#/job-controller/getDashboardMetrics" class="api-link">
+                📊 Dashboard-Metriken
+            </a>
+            <a href="/swagger-ui/index.html#/job-controller/getCompetenceTrends" class="api-link">
+                📈 Kompetenz-Trends
+            </a>
+            <a href="/swagger-ui/index.html#/regelverwaltung/getEscoFull" class="api-link">
+                🧠 ESCO-Wissensbasis
+            </a>
+        </div>
+
+        <div class="status">
+            <div class="status-item">
+                <div class="status-icon">✅</div>
+                <div class="status-label">Kotlin API</div>
+                <div class="status-value">Port 8080</div>
+            </div>
+            <div class="status-item">
+                <div class="status-icon">✅</div>
+                <div class="status-label">Python Backend</div>
+                <div class="status-value">Port 8000</div>
+            </div>
+            <div class="status-item">
+                <div class="status-icon">✅</div>
+                <div class="status-label">Streamlit</div>
+                <div class="status-value">Port 8501</div>
+            </div>
+            <div class="status-item">
+                <div class="status-icon">✅</div>
+                <div class="status-label">PostgreSQL</div>
+                <div class="status-value">Port 5432</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
