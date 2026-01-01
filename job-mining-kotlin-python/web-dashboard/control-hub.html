@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Control Hub - Job Mining Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .control-panel {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            border-radius: 10px;
+            color: white;
+        }
+        .service-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .status-online { background-color: #27ae60; }
+        .status-offline { background-color: #e74c3c; }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <span class="navbar-brand">🎛️ Job Mining Control Hub</span>
+        <a href="index.html" class="btn btn-outline-light btn-sm">← Zurück zum Dashboard</a>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <!-- Service Status -->
+    <div class="control-panel">
+        <h2>🔧 Service Management</h2>
+        <div class="row mt-3">
+            <div class="col-md-3">
+                <div class="service-card">
+                    <h5>🐍 Python Backend</h5>
+                    <p><span class="status-indicator status-online"></span>Port 8000</p>
+                    <button class="btn btn-sm btn-primary" onclick="restartService('python')">Restart</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="service-card">
+                    <h5>☕ Kotlin API</h5>
+                    <p><span class="status-indicator status-online"></span>Port 8080</p>
+                    <button class="btn btn-sm btn-primary" onclick="restartService('kotlin')">Restart</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="service-card">
+                    <h5>🗄️ PostgreSQL</h5>
+                    <p><span class="status-indicator status-online"></span>Port 5432</p>
+                    <button class="btn btn-sm btn-primary" onclick="restartService('db')">Restart</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="service-card">
+                    <h5>📊 Streamlit</h5>
+                    <p><span class="status-indicator status-online"></span>Port 8501</p>
+                    <button class="btn btn-sm btn-primary" onclick="restartService('streamlit')">Restart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">🔍 Discovery Management</div>
+                <div class="card-body">
+                    <a href="http://localhost:8000/discovery/candidates" class="btn btn-outline-primary">Candidates</a>
+                    <a href="http://localhost:8000/discovery/approved" class="btn btn-outline-success">Approved</a>
+                    <a href="http://localhost:8000/discovery/ignored" class="btn btn-outline-danger">Ignored</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">📜 Live Logs</div>
+                <div class="card-body">
+                    <button class="btn btn-outline-secondary" onclick="showLogs('python')">Python Logs</button>
+                    <button class="btn btn-outline-secondary" onclick="showLogs('kotlin')">Kotlin Logs</button>
+                    <button class="btn btn-outline-secondary" onclick="showLogs('db')">DB Logs</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Links -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">📊 Dashboard Versionen</div>
+                <div class="card-body">
+                    <a href="index.html" class="btn btn-primary">🏠 Haupt-Dashboard (Chart.js)</a>
+                    <a href="http://localhost:8501" class="btn btn-success">📈 Streamlit Dashboard</a>
+                    <a href="archive.html" class="btn btn-secondary">📦 Archiv (alte HTML-Versionen)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function restartService(service) {
+        if (!confirm(`Möchten Sie ${service} wirklich neustarten?`)) return;
+
+        try {
+            const response = await fetch(`http://localhost:8000/admin/restart/${service}`, {
+                method: 'POST'
+            });
+            if (response.ok) {
+                alert(`✅ ${service} wird neugestartet...`);
+                setTimeout(() => location.reload(), 3000);
+            } else {
+                alert(`❌ Fehler beim Neustart von ${service}`);
+            }
+        } catch (error) {
+            alert(`❌ Verbindungsfehler: ${error.message}`);
+        }
+    }
+
+    function showLogs(service) {
+        window.open(`http://localhost:8000/admin/logs/${service}`, '_blank');
+    }
+</script>
+</body>
+</html>
